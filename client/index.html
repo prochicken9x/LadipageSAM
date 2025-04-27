@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="vi" class="md:scroll-smooth">
+  <head>
+    <!-- Title trang -->
+    <title>Hợp tác đại lý bình ắc quy - SAM Global Battery</title>
+
+    <!-- Meta cơ bản SEO -->
+    <meta name="description" content="SAM Global Battery - Nhà phân phối bình ắc quy ô tô, xe nâng, xe golf, UPS hàng đầu Việt Nam. Hợp tác đại lý ngay hôm nay!">
+    <meta name="keywords" content="ắc quy ô tô, ắc quy xe nâng, ắc quy xe golf, đại lý ắc quy, phân phối ắc quy">
+    <meta name="author" content="SAM Global Battery">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Meta Robots: Cho phép Google index và theo dõi -->
+    <meta name="robots" content="index, follow">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Preload Favicon: Tăng tốc độ tải icon -->
+    <link rel="preload" href="/favicon.ico" as="image" type="image/x-icon" />
+
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1"
+    />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Replit Banner Script -->
+    <script
+      type="text/javascript"
+      src="https://replit.com/public/js/replit-dev-banner.js"
+    ></script>
+
+    <!-- Smooth Scroll Adjust Header -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const links = document.querySelectorAll('a[href^="#"]');
+        const header = document.querySelector("header");
+
+        links.forEach(function (link) {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href").substring(1);
+            const target = document.getElementById(targetId);
+
+            if (target) {
+              const headerHeight = header ? header.offsetHeight : 0;
+              const extraOffset = 50;
+              const elementPosition =
+                target.getBoundingClientRect().top + window.scrollY;
+              const offsetPosition =
+                elementPosition - (headerHeight + extraOffset);
+
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth",
+              });
+            }
+          });
+        });
+      });
+    </script>
+
+    <!-- Smooth Scroll Function -->
+    <script>
+      function smoothScrollTo(targetId, duration = 1200) {
+        const target = document.getElementById(targetId);
+        if (!target) return;
+
+        const isMobile = window.innerWidth < 768;
+        const header = document.querySelector("header");
+        let headerHeight = header ? header.offsetHeight : isMobile ? 60 : 80;
+
+        headerHeight = headerHeight - 20;
+
+        const targetPosition =
+          target.getBoundingClientRect().top +
+          window.pageYOffset -
+          headerHeight;
+
+        if (isMobile) {
+          window.scrollTo(0, targetPosition);
+        } else {
+          const startPosition = window.pageYOffset;
+          const distance = targetPosition - startPosition;
+          let startTime = null;
+
+          function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const run = easeInOutQuad(
+              timeElapsed,
+              startPosition,
+              distance,
+              duration,
+            );
+            window.scrollTo(0, run);
+            if (timeElapsed < duration) requestAnimationFrame(animation);
+          }
+
+          function easeInOutQuad(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return (c / 2) * t * t + b;
+            t--;
+            return (-c / 2) * (t * (t - 2) - 1) + b;
+          }
+
+          requestAnimationFrame(animation);
+        }
+      }
+    </script>
+  </body>
+</html>
